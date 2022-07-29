@@ -1,6 +1,7 @@
-import mongoose, { Schema } from 'mongoose'
+import { Schema , model, Model } from 'mongoose'
+import { User } from '../types/user';
 
-const userSchema = new mongoose.Schema(
+const userSchema : Schema<User> = new Schema(
   {
     firstName: {
       type: String,
@@ -39,7 +40,8 @@ const userSchema = new mongoose.Schema(
   }
 )
 
-module.exports.Users = mongoose.model(
+
+export const Users : Model<User> = model<User>(
   "Users",
  userSchema
 );

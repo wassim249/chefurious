@@ -18,6 +18,6 @@ app.use(errorHandler);
 
 connectDB();
 
-const port = process.env.PORT || 3000;
+const port : number = parseInt(process.env.PORT || "3000") ;
 
 app.listen(port, () => console.log(`SERVER RUNNING ON PORT : ${port}`));

@@ -4,8 +4,11 @@
         "module": "commonjs",
         "jsx": "preserve",
         "strict": true,
+        "rootDir" : "./src" ,
+        "outDir" : "./dist",
         "esModuleInterop": true,
-        "lib": ["es2018", "esnext.asynciterable"]
+        "lib": ["es2018", "esnext.asynciterable"],
+
     },
     "exclude": ["node_modules"]
 }
