@@ -7,6 +7,7 @@ import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
 import { User } from "./types/user";
+import { removeCookie } from "./utils";
 
 const App: FC = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -17,9 +18,13 @@ const App: FC = () => {
     };
     getUser();
   }, []);
-
+  const logout = () : void => {
+    removeCookie('token');
+    setUser(null);
+    window.location.reload();
+  }
   return (
-    <UserCtx.Provider value={{ user, setUser }}>
+    <UserCtx.Provider value={{ user, setUser , logout }}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />

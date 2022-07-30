@@ -3,7 +3,9 @@ import { User } from "../types/user";
 
 interface UserContextProps {
     user: User | null;
-    setUser:Dispatch< SetStateAction<User | null>>;}
+    setUser:Dispatch< SetStateAction<User | null>>;
+    logout : () => void;
+  }
 
 export const UserCtx: React.Context<UserContextProps | null> = createContext<UserContextProps| null>(
   null

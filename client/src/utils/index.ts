@@ -13,3 +13,7 @@ export const setCookie = (key: string, value: string): string | null => {
     return null;
   }
 };
+
+export const removeCookie = (key: string): void => {
+  Cookies.remove(key);
+}

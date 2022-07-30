@@ -6,6 +6,7 @@ import { HamburgerMenu } from "./HamburgerMenu";
 import { DropDownMenu } from "./DropdownMenu";
 import { UserCtx } from "../../contexts/userContext";
 import { IoMdPerson } from "react-icons/io";
+import { BiLogOut } from "react-icons/bi";
 
 export const NavBar: FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -20,6 +21,8 @@ export const NavBar: FC = () => {
       if (window.innerWidth >= 768) setIsOpen(false);
     });
   }, []);
+
+  
   return (
     <>
       <nav
@@ -57,17 +60,27 @@ export const NavBar: FC = () => {
           setIsOpen={setIsOpen}
         />
         <div className="hidden md:block">
-          {
-            UserContext?.user?._id ? (
-              <div className="flex items-center justify-between w-32">
-                <IoMdPerson color="#F97316" /> {`${UserContext?.user?.firstName} ${UserContext?.user?.lastName}`}
+          {UserContext?.user?._id ? (
+            <div className="flex items-center justify-between w-44">
+              <IoMdPerson color="#F97316" />
+              {`${UserContext?.user?.firstName} ${UserContext?.user?.lastName}`}
+              <div className="rounded-full bg-orange p-2 cursor-pointer" onClick={()=>UserContext.logout()}>
+                <BiLogOut color="white" />
               </div>
-              ) : ( <LoginButton /> )
-          }
-       
+            </div>
+          ) : (
+            <LoginButton />
+          )}
         </div>
       </nav>
-      {isOpen && <DropDownMenu user={UserContext?.user} isOpen={isOpen} setIsOpen={setIsOpen} />}
+      {isOpen && (
+        <DropDownMenu
+          user={UserContext?.user}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          logout={UserContext?.logout}
+        />
+      )}
     </>
   );
 };
