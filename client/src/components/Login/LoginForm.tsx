@@ -1,6 +1,7 @@
-import { FC, useRef, useState } from "react";
+import { FC, useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../api/user";
+import { UserCtx } from "../../contexts/userContext";
 import { setCookie } from "../../utils";
 
 const LoginForm: FC = () => {
@@ -9,6 +10,7 @@ const LoginForm: FC = () => {
   const passwordRef = useRef<HTMLInputElement>(null);
   const rememeberMeRef = useRef<HTMLInputElement>(null)
   const [loading, setLoading] = useState(false);
+  const userContext = useContext(UserCtx)
   const INPUT_CLASSNAME: string =
     "block mt-2 p-2 font-openSans text-sm w-full  border rounded-lg border-gray-300 focus:outline-orange ";
 
@@ -53,6 +55,7 @@ const LoginForm: FC = () => {
         if(rememeberMeRef.current?.checked){
           setCookie("token", response.data.token);
         }
+        userContext?.setUser(response.data);
         navigate("/");
       } else if (response.status === 400) {
         alert(response.data.message);

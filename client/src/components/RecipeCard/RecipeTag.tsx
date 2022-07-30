@@ -8,9 +8,7 @@ type RecipeTagProps = {
 }
 
 export const RecipeTag : FC<RecipeTagProps> = ({text, Icon , color} : RecipeTagProps) => {
-  
-  console.log(text, color);
-  
+    
     return (
     <div className={`rounded-full flex justify-between items-center py-1 px-4 md:px-2  bg-${color}-200`}>
     <Icon size={10} className="opacity-80" />

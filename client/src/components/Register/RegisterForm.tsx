@@ -1,11 +1,12 @@
-import { FC, RefObject, useRef } from "react";
+import { FC, RefObject, useContext, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { register } from "../../api/user";
+import { UserCtx } from "../../contexts/userContext";
 import { setCookie } from "../../utils";
 
 const RegisterForm: FC = () => {
   const navigate = useNavigate();
-
+  const userContext = useContext(UserCtx);
   const firstNameRef: RefObject<HTMLInputElement> =
     useRef<HTMLInputElement>(null);
   const lastNameRef: RefObject<HTMLInputElement> =
@@ -60,10 +61,9 @@ const RegisterForm: FC = () => {
 
     return true;
   };
-  
+
   const signin = async (): Promise<void> => {
     if (validateInputs()) {
-     
       const response = await register({
         // @ts-ignore
         firstName: firstNameRef.current?.value,
@@ -76,7 +76,6 @@ const RegisterForm: FC = () => {
         // @ts-ignore
         password: passwordRef.current?.value,
       });
-      console.log(response);
 
       if (!response) {
         alert("Unknown error occured");
@@ -85,9 +84,10 @@ const RegisterForm: FC = () => {
       // check if status code is 200
       if (response.status === 201) {
         // TODO : display success message
-        console.log(response.data);
         alert("Register success");
+        
         setCookie("token", response.data.token);
+       userContext?.setUser(response.data);
         navigate("/");
       } else if (response.status === 400) {
         alert(response.data.message);

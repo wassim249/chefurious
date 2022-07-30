@@ -1,21 +1,10 @@
-import { createContext, useState, Context , ReactNode } from "react";
-import {User} from '../types/user'
+import React, { createContext, Dispatch, SetStateAction } from "react";
+import { User } from "../types/user";
 
-const UserContext  = createContext(null)
-type UserContextType = {
-    children: ReactNode
-}
-export = ({children} : UserContextType) => {
-    const UserContextProvider = UserContext.Provider
+interface UserContextProps {
+    user: User | null;
+    setUser:Dispatch< SetStateAction<User | null>>;}
 
-    const [user, setUser] = useState(null)
-    return (
-       <UserContextProvider>
-       </UserContextProvider>
-     
-
-    )
-}
-
-
-
+export const UserCtx: React.Context<UserContextProps | null> = createContext<UserContextProps| null>(
+  null
+);

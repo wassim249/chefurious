@@ -1,14 +1,17 @@
 import { useEffect } from "react";
+import { IoMdPerson } from "react-icons/io";
 import { Link } from "react-router-dom";
+import { User } from "../../types/user";
 import { HamburgerMenu } from "./HamburgerMenu";
 import { LoginButton } from "./LoginButton";
 
 type DropDownMenuProps = {
     isOpen: boolean;
     setIsOpen: (isOpen: boolean) => void;
+    user : User | null | undefined;
   }
   
- export const DropDownMenu = ({ isOpen, setIsOpen } : DropDownMenuProps) => {
+ export const DropDownMenu = ({ isOpen, setIsOpen , user } : DropDownMenuProps) => {
     useEffect(() => {
       window.onscroll = () => {
         window.scrollTo(0, 0);
@@ -45,7 +48,14 @@ type DropDownMenuProps = {
           </Link>
         </div>
         <div>
-          <LoginButton className="text-white font-bold text-xl" iconSize={25} />
+        {
+            user?._id ? (
+              <div className="flex items-center justify-between w-32 font-bold text-white">
+                <IoMdPerson color="#F97316" /> {`${user.firstName} ${user.lastName}`}
+              </div>
+              ) : ( <LoginButton className="text-white font-bold text-xl" iconSize={25} /> )
+          }
+          
         </div>
       </div>
     );

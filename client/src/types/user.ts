@@ -12,4 +12,12 @@ export type UserLogin = {
 };
 
 export type User = {
+  __v: number;
+  _id: string;
+  bio : string ,
+  createdAt: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  updatedAt: string;
 }
