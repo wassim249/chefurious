@@ -1,9 +1,9 @@
 import { AiFillFire } from "react-icons/ai";
+import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { BsClock } from "react-icons/bs";
 import { GiProgression } from "react-icons/gi";
 import { Rating } from "./Rating";
 import { RecipeTag } from "./RecipeTag";
-import {BiDotsHorizontalRounded} from "react-icons/bi";
 
 type RecipeCardProps = {
   recipe: any;
@@ -39,8 +39,11 @@ export const RecipeCard = ({ recipe }: RecipeCardProps) => {
       </div>
       <div className="flex justify-between items-center mt-3 p-3">
         <Rating rating={recipe.rating} />
-        <a href="/" className=" bg-orange text-white rounded-full px-4 py-1 font-black text-sm">
-         <BiDotsHorizontalRounded />
+        <a
+          href="/"
+          className=" bg-orange text-white rounded-full px-4 py-1 font-black text-sm"
+        >
+          <BiDotsHorizontalRounded />
         </a>
       </div>
     </div>
